@@ -1,0 +1,130 @@
+/'
+  fem.puml
+  Copyright (C) 2022 sakakibara <sakakibara@skk.local>
+ 
+  Distributed under terms of the MIT license.
+ '/
+
+@startuml
+
+title fem
+
+/'
+interface I {
+    + {abstract} methods1() : int
+    + {abstract} methods2() : String
+}
+
+abstract class A {
+    - a1 : int
+    - a2 : String
+    + methods1() : int
+    + {abstract} methods2() : String
+}
+
+class B <<children>> {
+    - {static} b1 : int 
+    - b2 : double 
+    + methods2() : String
+    + methods3(int b1, double b2) : void
+}
+
+class C {
+    hogehoge : int
+    hugahuga : String
+    hoge() : double
+    huga() : String
+}
+
+class A extends I
+class B implements A
+
+C --|> A
+C <|-- A
+
+'/
+
+/' class Field{ '/
+/' } '/
+
+/' class Elem{ '/
+/'     - number : int[3] '/
+/'     + getNumber() : int[3] '/
+/'     + setNumber() : void '/
+/' } '/
+
+/' class Node{ '/
+/'     - number: int '/
+/'     + xy : double[2] '/
+/'     + getNumber() : int '/
+/'     + setNumber() : void '/
+/' } '/
+
+/' Field *-- Elem '/
+/' Elem -- Node '/
+
+class Node{
+    + xy : int[]
+    + v : double
+    + Node() : void
+}
+
+class Elem{
+    + nodeList : int[]
+    + exy : double[]
+    + c : double[]
+    + d : double[]
+    + se : double[][]
+    + delt : double
+
+    + Elem() : void
+    + {static} delmax : double
+    + {static} delmin : double
+}
+
+class Field{
+    - npoint : int
+    - nelem : int
+    + node : Node[]
+    + elem : Elem[]
+    + Field() : void
+}
+
+class Afield{
+    - physicalConstant : PhysicalConstant
+    - dirichlet : Dirichlet
+
+    + h : double[][]
+    + Afield() : void
+    + calcElem() : void
+    + calcElemMatrix() : void
+    + calcCoefMatrix() : void
+}
+
+class Dirichlet{
+    - nboun : int
+    - ndiri : int
+
+    + ndis : int[]
+    + ndie : int[]
+    + diri : int[]
+}
+
+class PhysicalConstant{
+    - eair : double
+    - peam : double
+    - eh : double
+    - ihs : int
+    - ihe : int
+    + updateEh() : void
+}
+
+class Afield extends Field
+Field *- Node 
+Field *- Elem 
+Afield <- Dirichlet
+Afield <- PhysicalConstant
+
+
+
+@enduml
