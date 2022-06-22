@@ -10,6 +10,8 @@
 #include <eigen3/Eigen/Core>
 #include <cmath>
 #include "node.h"
+#include "PhysicalConstant.h"
+#include "Dirichlet.h"
 
 // clang++ -std=c++11 node.cpp -o node
 // Field method

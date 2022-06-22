@@ -10,6 +10,9 @@
 #include <eigen3/Eigen/Core>
 // #include "app.h"
 #include "node.h"
+#include "PhysicalConstant.h"
+#include "Dirichlet.h"
+#include "Afield.h"
 
 void he(int num = 1){
     std::cout << "hello" << num << std::endl;

@@ -9,7 +9,9 @@
 #include <vector>
 #include <eigen3/Eigen/Core>
 #include <cmath>
-#include "node.h"
+#include "PhysicalConstant.h"
+#include "Dirichlet.h"
+#include "Afield.h"
 
 #define DEBUG 1
 
