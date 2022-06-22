@@ -49,8 +49,7 @@ int main () {
 
     for(int i=0; i<A.getNelem(); i++){
         for(int j=0; j<3; j++){
-            int temp = 0;
-            ifs >> temp;
+            int temp = 0; ifs >> temp;
             A.elem[i].nodeList[j] = temp - 1;
         }
     }
@@ -77,26 +76,27 @@ int main () {
 	ifs >> nboun >> nband >> ndiri >> ncur >> ihs >> ihe;
 	ifs >> peam;
 
-
-    A.physicalConstant.setIhs(ihs);
-    A.physicalConstant.setIhe(ihe);
-    A.physicalConstant.setPeam(peam);//peamしたら必ずupdateする必要があるので捜査としては分離するが, 関数としては組み込む
-    A.setEh(A.getEair()/A.getPeam());
+    // #TODO
+    A.setPhysicalConstant(1.0, peam, ihs, ihe);
+    // A.physicalConstant.setIhs(ihs);
+    // A.physicalConstant.setIhe(ihe);
+    // A.physicalConstant.setPeam(peam);//peamしたら必ずupdateする必要があるので捜査としては分離するが, 関数としては組み込む
+    // A.setEh(A.getEair()/A.getPeam());
 
     // A.updateEh();
     // A.setEh();
 
-    A.physicalConstant.setNdiri(ndiri);
+    // A.physicalConstant.setNdiri(ndiri);
 
     // TODO
-    for(int i=0; i < A.physicalConstant.getNdiri(); i++){
+    for(int i=0; i < A.getPhysicalConstant.getNdiri(); i++){
         int temp_ndis, temp_ndie , temp_diri = 0;
         // ifs >> A.ndis[i] >> A.ndie[i];
         // ifs >> A.diri[i];
         ifs >> temp_ndis >> temp_ndie;
         ifs >> temp_diri;
-        A.ndis.push_back(temp_ndis);
-        A.ndie.push_back(temp_ndie);
+        A.Ndis.push_back(temp_ndis);
+        A.Ndie.push_back(temp_ndie);
         A.diri.push_back(temp_diri);
     }
 

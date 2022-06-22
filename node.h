@@ -31,23 +31,38 @@ namespace fem{
             double getEh(){ return this->eh; }
             double getIhs(){ return this->ihs; }
             double getIhe(){ return this->ihe; }
-
     };
 
     class Dirichlet{
         private:
             int nboun; //固定境界節点の総数
             int ndiri; //ディリクレ条件でポテンシャルが等しい頂点数: ポテンシャルが1.0である頂点が123, 2.0である頂点が456ならndiri = 2
-
-        public:
             std::vector<int> ndis; //ディリクレ条件の最初の頂点番号
             std::vector<int> ndie; //ディリクレ条件の最後の頂点番号
             std::vector<int> diri; //ディリクレ条件のポテンシャル値1.0と2.0が入る
 
+        public:
+
             //ディリクレ条件
             Dirichlet() : nboun(0), ndiri(0), ndis(0,0), ndie(0,0), diri(0,0) {};
-            void setNdiri(int ndiri){ this->ndiri = ndiri; this->ndis.resize(ndiri); this->ndie.resize(ndiri); this->diri.resize(ndiri); }
+            void setNboun(int nboun){
+                this->nboun = nboun;
+            }
+            void setNdiri(int ndiri){
+                this->ndiri = ndiri;
+                setNdis(ndis);
+                setNdie(ndie);
+                setDiri(ndie);
+            }
+            void setNdis(std::vector<int>& ndis){ this->ndis = ndis; }
+            void setNdie(std::vector<int>& ndie){ this->ndie = ndie; }
+            void setDiri(std::vector<int>& diri){ this->diri = diri; }
+
+            int getNboun(){ return this->nboun; }
             int getNdiri(){ return this->ndiri; }
+            std::vector<int> getNdis(){ return this->ndis; }
+            std::vector<int> getNdie(){ return this->ndie; }
+            std::vector<int> getDiri(){ return this->diri; }
     };
 
     class Node{
@@ -141,7 +156,9 @@ namespace fem{
             void calcElem();
             void calcElemMatrix();
             void calcCoefMatrix();
+            void setPhysicalConstant(double eair, double peam, int ihs, int ihe);
     };
+
 }
 
 #endif /* !NODE_H */

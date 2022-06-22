@@ -16,8 +16,10 @@
 
 #define DEBUG 1
 
-double fem::Elem::delmax = 0;
-double fem::Elem::delmin = 0;
+using namespace fem;
+
+double Elem::delmax = 0;
+double Elem::delmin = 0;
 
 // void fem::Field::setNpoint(int npoint){
 //     this->npoint = npoint;
@@ -59,8 +61,28 @@ double fem::Elem::delmin = 0;
 //     return this->eh;
 // }
 
+PhysicalConstant PhysicalConstant::getPhysicalConstant(){
+    return physicalConstant;
+};
+
+void Afield::setDirichlet(int nboun, int diri, std::vector<int> ndis, std::vector<int> ndie, std::vector<int> diri){
+    dirichlet.setNboun(nboun);
+    dirichlet.setNdiri(ndiri);
+    dirichlet.setNdis(ndis);
+    dirichlet.setNdie(ndie);
+    dirichlet.setDiri(diri);
+}
+
+void Afield::setPhysicalConstant(double eair, double peam, int ihs, int ihe){
+    physicalConstant.setEair(1.0);
+    physicalConstant.setPeam(peam);
+    physicalConstant.setEh(this.getEair()/this.getPeam());
+    physicalConstant.setIhe(ihe);
+    physicalConstant.setIhs(ihs);
+}
+
 // 磁気抵抗は空間が持っているというよりその要素が持っている性質では?
-void fem::Afield::setExy(){
+void Afield::setExy(){
     for(int i=0; i<this->getNelem(); i++){
         this->elem[i].exy[0] = this->physicalConstant.getEair();
         this->elem[i].exy[1] = this->physicalConstant.getEair();
@@ -83,8 +105,7 @@ void fem::Afield::setExy(){
 // }
 
 
-void fem::Afield::calcElem(){
-
+void Afield::calcElem(){
     for(int i=0; i<this->getNelem(); i++){
 
         int j1 = elem[i].nodeList[0];
@@ -118,7 +139,7 @@ void fem::Afield::calcElem(){
     }
 }
 
-void fem::Afield::calcElemMatrix(){
+void Afield::calcElemMatrix(){
     for(int e=0; e<this->getNelem(); e++){
 
         double delt4 = 0.25/this->elem[e].delt;
@@ -146,8 +167,7 @@ void fem::Afield::calcElemMatrix(){
 
 
 #if DEBUG
-void fem::Afield::calcCoefMatrix(){
-
+void Afield::calcCoefMatrix(){
     int m = 0;
     int n = 0;
 
@@ -175,8 +195,7 @@ void fem::Afield::calcCoefMatrix(){
 }
 #endif
 
-void fem::Afield::calcCoefMatrix(){
-
+void Afield::calcCoefMatrix(){
     int m = 0;
     int n = 0;
 
