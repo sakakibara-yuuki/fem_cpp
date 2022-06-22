@@ -89,7 +89,7 @@ int main () {
     // A.physicalConstant.setNdiri(ndiri);
 
     // TODO
-    for(int i=0; i < A.getPhysicalConstant.getNdiri(); i++){
+    for(int i=0; i < A.getPhysicalConstant().getNdiri(); i++){
         int temp_ndis, temp_ndie , temp_diri = 0;
         // ifs >> A.ndis[i] >> A.ndie[i];
         // ifs >> A.diri[i];
