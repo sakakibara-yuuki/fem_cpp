@@ -31,15 +31,15 @@ namespace fem{
                 setNdie(ndie);
                 setDiri(ndie);
             }
-            void setNdis(std::vector<int>& ndis){ this->ndis = ndis; }
-            void setNdie(std::vector<int>& ndie){ this->ndie = ndie; }
-            void setDiri(std::vector<int>& diri){ this->diri = diri; }
+            void setNdis(const std::vector<int>& ndis){ this->ndis = ndis; }
+            void setNdie(const std::vector<int>& ndie){ this->ndie = ndie; }
+            void setDiri(const std::vector<int>& diri){ this->diri = diri; }
 
-            int getNboun(){ return this->nboun; }
-            int getNdiri(){ return this->ndiri; }
-            std::vector<int> getNdis(){ return this->ndis; }
-            std::vector<int> getNdie(){ return this->ndie; }
-            std::vector<int> getDiri(){ return this->diri; }
+            int getNboun(){ return nboun; }
+            int getNdiri(){ return ndiri; }
+            std::vector<int>& getNdis(){ return ndis; }
+            std::vector<int>& getNdie(){ return ndie; }
+            std::vector<int>& getDiri(){ return diri; }
     };
 
 }
