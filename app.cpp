@@ -92,15 +92,15 @@ int main () {
     // A.physicalConstant.setNdiri(ndiri);
 
     // TODO
-    for(int i=0; i < A.getPhysicalConstant().getNdiri(); i++){
+    for(int i=0; i < A.getDirichlet().getNdiri(); i++){
         int temp_ndis, temp_ndie , temp_diri = 0;
         // ifs >> A.ndis[i] >> A.ndie[i];
         // ifs >> A.diri[i];
         ifs >> temp_ndis >> temp_ndie;
         ifs >> temp_diri;
-        A.Ndis.push_back(temp_ndis);
-        A.Ndie.push_back(temp_ndie);
-        A.diri.push_back(temp_diri);
+        A.getDirichlet().getNdis().push_back(temp_ndis);
+        A.getDirichlet().getNdie().push_back(temp_ndie);
+        A.getDirichlet().getDiri().push_back(temp_diri);
     }
 
     // TODO
@@ -117,9 +117,9 @@ int main () {
     A.calcElemMatrix();
 
     //// 固定境界条件の設定
-    for(int i=0; i<A.getNdiri(); i++){
-        for(int j=A.ndis[i]; j<A.ndie[i]; j++){
-            A.node[j].v = A.diri[i];
+    for(int i=0; i<A.getDirichlet().getNdiri(); i++){
+        for(int j=A.getDirichlet().getNdis()[i]; j<A.getDirichlet().getNdie()[i]; j++){
+            A.node[j].v = A.getDirichlet().getDiri()[i];
         }
     }
 

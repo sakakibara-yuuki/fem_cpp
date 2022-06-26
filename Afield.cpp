@@ -23,12 +23,21 @@ double Elem::delmin = 0;
 void Afield::setPhysicalConstant(double eair, double peam, int ihs, int ihe){
     physicalConstant.setEair(1.0);
     physicalConstant.setPeam(peam);
-    physicalConstant.setEh(this.getEair()/this.getPeam());
+    physicalConstant.setEh(this->getPhysicalConstant().getEair()/this->getPhysicalConstant().getPeam());
     physicalConstant.setIhe(ihe);
     physicalConstant.setIhs(ihs);
+
+    for(int i=0; i<this->getNelem(); i++){
+        this->elem[i].exy[0] = this->physicalConstant.getEair();
+        this->elem[i].exy[1] = this->physicalConstant.getEair();
+    }
+    for(int i=this->physicalConstant.getIhs(); i<this->physicalConstant.getIhe(); i++){
+        this->elem[i].exy[0] = this->physicalConstant.getEh();
+        this->elem[i].exy[1] = this->physicalConstant.getEh();
+    }
 }
 
-void Afield::setDirichlet(int nboun, int ndiri, std::vector<int>& ndis, std::vector<int>& ndie, std::vector<int> diri){
+void Afield::setDirichlet(int nboun, int ndiri, std::vector<int>& ndis, std::vector<int>& ndie, std::vector<int>& diri){
     dirichlet.setNboun(nboun);
     dirichlet.setNdiri(ndiri);
     dirichlet.setNdis(ndis);
@@ -42,18 +51,6 @@ PhysicalConstant& getPhysicalConstant(){
 
 Dirichlet& getDirichlet(){
     return dirichlet;
-}
-
-
-void Afield::setExy(){
-    for(int i=0; i<this->getNelem(); i++){
-        this->elem[i].exy[0] = this->physicalConstant.getEair();
-        this->elem[i].exy[1] = this->physicalConstant.getEair();
-    }
-    for(int i=this->physicalConstant.getIhs(); i<this->physicalConstant.getIhe(); i++){
-        this->elem[i].exy[0] = this->physicalConstant.getEh();
-        this->elem[i].exy[1] = this->physicalConstant.getEh();
-    }
 }
 
 void Afield::calcElem(){
@@ -116,7 +113,7 @@ void Afield::calcElemMatrix(){
     }
 }
 
-#if DEBUG
+#ifndef DEBUG
 void Afield::calcCoefMatrix(){
     int m = 0;
     int n = 0;

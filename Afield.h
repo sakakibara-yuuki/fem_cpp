@@ -8,6 +8,10 @@
 #ifndef AFIELD_H
 #define AFIELD_H
 
+#ifndef NODE_H
+#include "node.h"
+#endif
+
 namespace fem{
     class Afield : public Field{
         private:
