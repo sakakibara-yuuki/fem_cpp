@@ -20,14 +20,6 @@ using namespace fem;
 double Elem::delmax = 0;
 double Elem::delmin = 0;
 
-void Afield::setDirichlet(int nboun, int diri, std::vector<int> ndis, std::vector<int> ndie, std::vector<int> diri){
-    dirichlet.setNboun(nboun);
-    dirichlet.setNdiri(ndiri);
-    dirichlet.setNdis(ndis);
-    dirichlet.setNdie(ndie);
-    dirichlet.setDiri(diri);
-}
-
 void Afield::setPhysicalConstant(double eair, double peam, int ihs, int ihe){
     physicalConstant.setEair(1.0);
     physicalConstant.setPeam(peam);
@@ -35,6 +27,23 @@ void Afield::setPhysicalConstant(double eair, double peam, int ihs, int ihe){
     physicalConstant.setIhe(ihe);
     physicalConstant.setIhs(ihs);
 }
+
+void Afield::setDirichlet(int nboun, int ndiri, std::vector<int>& ndis, std::vector<int>& ndie, std::vector<int> diri){
+    dirichlet.setNboun(nboun);
+    dirichlet.setNdiri(ndiri);
+    dirichlet.setNdis(ndis);
+    dirichlet.setNdie(ndie);
+    dirichlet.setDiri(diri);
+}
+
+PhysicalConstant& getPhysicalConstant(){
+    return physicalConstant;
+}
+
+Dirichlet& getDirichlet(){
+    return dirichlet;
+}
+
 
 void Afield::setExy(){
     for(int i=0; i<this->getNelem(); i++){
