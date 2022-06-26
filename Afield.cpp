@@ -45,11 +45,11 @@ void Afield::setDirichlet(int nboun, int ndiri, std::vector<int>& ndis, std::vec
     dirichlet.setDiri(diri);
 }
 
-PhysicalConstant& getPhysicalConstant(){
+PhysicalConstant& Afield::getPhysicalConstant(){
     return physicalConstant;
 }
 
-Dirichlet& getDirichlet(){
+Dirichlet& Afield::getDirichlet(){
     return dirichlet;
 }
 

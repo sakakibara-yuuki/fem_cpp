@@ -17,9 +17,10 @@ namespace fem{
 
             explicit Node() : xy(2), v(0){};
 
-            void setXy(std::vector<int> xy){
+            void setXy(std::vector<double> xy){
                 this->xy = xy;
             };
+
             void setV(double v){
                 this->v = v;
             };
