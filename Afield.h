@@ -20,11 +20,12 @@ namespace fem{
 
         public:
             std::vector<std::vector<double>> h;//全体係数
+            Eigen::MatrixXd H;
 
-            explicit Afield() : physicalConstant(), dirichlet(), h(7, std::vector<double>(7,0)) {};
+            explicit Afield() : physicalConstant(), dirichlet(), h(7, std::vector<double>(7,0)), H(7,7) {};
 
             void setPhysicalConstant(double eair, double peam, int ihs, int ihe);
-            void setDirichlet(int nboun, int ndiri, std::vector<int>& ndis, std::vector<int>& ndie, std::vector<int>& diri);
+            void setDirichlet(int nboun, int ndiri, const std::vector<int>& ndis, const std::vector<int>& ndie, const std::vector<int>& diri);
 
             PhysicalConstant& getPhysicalConstant();
             Dirichlet& getDirichlet();

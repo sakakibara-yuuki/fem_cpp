@@ -153,9 +153,12 @@ int main () {
     for(int i=0; i<A.getNpoint(); i++){
         for(int j=0; j<A.getNpoint(); j++){
             std::cout << A.h[i][j] << " ";
+            A.H(i,j) = A.h[i][j];
         }
         std::cout << std::endl;
     }
+
+    std::cout << A.H << std::endl;
 
 
     ////連立1次方程式の計算

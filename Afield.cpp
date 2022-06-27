@@ -37,7 +37,7 @@ void Afield::setPhysicalConstant(double eair, double peam, int ihs, int ihe){
     }
 }
 
-void Afield::setDirichlet(int nboun, int ndiri, std::vector<int>& ndis, std::vector<int>& ndie, std::vector<int>& diri){
+void Afield::setDirichlet(int nboun, int ndiri, const std::vector<int>& ndis, const std::vector<int>& ndie, const std::vector<int>& diri){
     dirichlet.setNboun(nboun);
     dirichlet.setNdiri(ndiri);
     dirichlet.setNdis(ndis);
